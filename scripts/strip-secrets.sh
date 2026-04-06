@@ -47,6 +47,10 @@ public let SG_API_WEBAPP_URL_PARSED = URL(string: SG_CONFIG.webappUrl)!
 SWIFT
 echo "  Stripped: SGConfig"
 
+# 1.5 SupportersCrypto — remove HMAC salt
+sed -i '' 's/private let HMAC_SALT = .*/private let HMAC_SALT = "YOUR_HMAC_SALT"/' GLEGram/SGSupporters/Sources/SupportersCrypto.swift 2>/dev/null
+echo "  Stripped: HMAC salt"
+
 # 2. Build configs — replace with templates
 for cfg in build-system/ipa-build-configuration.json build-system/glegram-appstore-configuration.json; do
     cat > "$cfg" << 'JSON'

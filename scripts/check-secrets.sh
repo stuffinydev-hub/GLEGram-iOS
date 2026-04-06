@@ -26,8 +26,20 @@ if grep -rq "F8A8NWPL78" . --include="*.swift" --include="*.json" --include="*.b
     FOUND=1
 fi
 
+# HMAC salt
+if grep -rq "glegram-hmac-v1" . --include="*.swift" 2>/dev/null; then
+    echo "FAIL: HMAC salt found!"
+    FOUND=1
+fi
+
 # SSL pinning hashes
 if grep -rq "brDmHiqwkhgPrFDmkcD2IsDUdKLZlyGjGkn0SOGNKFI" . --include="*.swift" --include="*.json" 2>/dev/null; then
+# HMAC salt
+if grep -rq "glegram-hmac-v1" . --include="*.swift" 2>/dev/null; then
+    echo "FAIL: HMAC salt found!"
+    FOUND=1
+fi
+
     echo "FAIL: SSL pinning hashes found!"
     FOUND=1
 fi

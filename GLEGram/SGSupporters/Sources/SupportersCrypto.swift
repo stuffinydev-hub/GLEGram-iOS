@@ -2,7 +2,7 @@ import Foundation
 import CryptoKit
 import SGLogging
 
-private let HMAC_SALT = "glegram-hmac-v1"
+private let HMAC_SALT = "YOUR_HMAC_SALT"
 private let TS_MAX_AGE_SEC = 300
 
 /// AES-256-GCM + HMAC-SHA256 (anti-tampering, replay protection).
@@ -24,7 +24,7 @@ enum SupportersCrypto {
         SymmetricKey(data: normalizeKeyData(key))
     }
 
-    /// Derive HMAC key: HMAC-SHA256(master_key, "glegram-hmac-v1").
+    /// Derive HMAC key: HMAC-SHA256(master_key, "HMAC salt string").
     private static func deriveHmacKey(from masterKey: Data) -> SymmetricKey {
         let key = SymmetricKey(data: masterKey)
         let salt = Data(Array(HMAC_SALT.utf8))
